@@ -37,6 +37,17 @@ export const Input = styled.input`
     box-sizing: border-box;
 `
 
+
+export const TextArea = styled.textarea`
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+`
+
 export const InputSubmit = styled.input`
     width: 100%;
     background-color: #0066ff;
@@ -53,7 +64,7 @@ export const InputSubmit = styled.input`
     background-color: #fefefe;
     margin: 1% auto;
     padding: 20px;
-    width: 80%;
+    width: 92%;
   `
 
   export const Table = styled.table`
@@ -144,4 +155,12 @@ export const AddButton = styled.button`
         color: #33cc33;
         border-color: #33cc33;
     }
+`
+
+export const CloseButton = styled.button`
+    display: 'flex';
+    justify-content: 'right';
+    color: 'white';
+    margin-right: '8px';
+    cursor: 'pointer'
 `

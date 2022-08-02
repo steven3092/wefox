@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './style.tsx';
-import Modal from './modal';
-import ModalAddUser from './modalAddUser'
+import ModalModifyCity from './modalModifyCity';
+import ModalAddCity from './modalAddCity'
 import Axios from 'axios';
 import {
   Table,
@@ -13,66 +13,51 @@ import {
   ModifyButton,
   AddButton,
 } from './style';
+import {
+  fetchWefoxDataList,
+  removeWefoxDataList
+} from './api-request';
 
 const WefoxApp = () => {
   const [listOfCities, setListOfCities] = useState([{
     id: 0,
     content: '',
-    lat: 0,
-    long: 0,
+    lat: '',
+    long: '',
     title: '',
-    image_url: '',
     created_at: '',
     updated_at: '',
   }]);
-  const [addName, setAddName] = useState(null);
-  const [addLastName, setAddLastName] = useState(null);
+  const [patchCity, setPatchCity] = useState({
+    id: 0,
+    content: '',
+    lat: '',
+    long: '',
+    title: '',
+  });
   const [patchName, setPatchName] = useState('');
   const [patchLastName, setPatchLastName] = useState('');
   const [userId, setUserId] = useState(0);
   const [isShowing, setIsShowing] = useState(false);
-  const [isShowingModalAddUser, setIsShowingModalAddUser] = useState(false);
-  const [refreshing, setRefreshing] = useState(false)
+  const [isShowingModalAddCity, setIsShowingModalAddCity] = useState<boolean>(false);
+  const [isShowingModalModifyCity, setIsShowingModalModifyCity] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false)
 
-  const fetchWefoxDataList = async () : Promise<any> => {
-    try {
-    const url = 'http://localhost:3000/api/v1/posts';
-    const header = { headers: { Accept: 'application/json' } };
-    const { data } = await Axios.get(url, header);
-    console.log('data:', data);
-    setListOfCities(data);
-    return data;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
 
-  const fetchWefoxDataShow = async () : Promise<any> => {
-    try {
-    const url = 'http://localhost:3000/api/v1/posts/1';
-    const header = { headers: { Accept: 'application/json' } };
-    const { data } = await Axios.get(url, header);
-    console.log('dataShow:', data);  
-    return data;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
+  // const fetchWefoxDataShow = async () : Promise<any> => {
+  //   try {
+  //   const url = 'http://localhost:3000/api/v1/posts/1';
+  //   const header = { headers: { Accept: 'application/json' } };
+  //   const { data } = await Axios.get(url, header);
+  //   console.log('dataShow:', data);  
+  //   return data;
+  //   } catch (err) {
+  //     console.log(err);
+  //     return err;
+  //   }
+  // };
 
-  const createWefoxData = async () : Promise<any> => {
-    try {
-    const url = 'http://localhost:3000/api/v1/posts';
-    const header = { headers: { Accept: 'application/json' } };
-    const { data } = await Axios.post(url, header);
-    console.log('data:', data);  
-    return data;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
+
 
   const updateWefoxData = async (id: number) : Promise<any> => {
     try {
@@ -87,27 +72,16 @@ const WefoxApp = () => {
     }
   };
 
-  const removeWefoxDataList = async (id: number) : Promise<any> => {
-    try {
-    const url = `http://localhost:3000/api/v1/posts/${id}`;
-    const header = { headers: { Accept: 'application/json' } };
-    const { data } = await Axios.delete(url, header);
-    console.log('data:', data);  
-    return data;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
 
   useEffect(() => {
-    fetchWefoxDataList();
-    fetchWefoxDataShow();
-  }, []);
+    fetchWefoxDataList(setListOfCities);
+    // fetchWefoxDataShow();
+  }, [refreshing]);
 
 
   const handleClickDelete = (id: number) => {
     removeWefoxDataList(id);
+    setRefreshing(!refreshing);
   };
   
   const handleClickPatch = (id: number) => {
@@ -115,16 +89,27 @@ const WefoxApp = () => {
   };
   
   
-  const handleClickModal = (name: string, lastName: string, id: number) => {
-    setIsShowing(true);
-    setPatchLastName(lastName);
-    setPatchName(name);
-    setUserId(id);
+  // const handleClickModal = (content: string, lat: string, long: string, title: string, id: number) => {
+  //   setIsShowing(true);
+  //   setPatchLastName(lastName);
+  //   setPatchName(name);
+  //   setUserId(id);
+  // };
+  const handleClickModalModifyCity = (id: number, content: string, lat: string, long: string, title: string) => {
+    setPatchCity({
+      id: id,
+      content: content,
+      lat: lat,
+      long: long,
+      title: title,
+    })
+    setIsShowingModalModifyCity(true);
   };
   
   const handleClickModalAddUser = () => {
-    setIsShowingModalAddUser(true);
+    setIsShowingModalAddCity(true);
   };
+console.log('listOfCities', listOfCities);
 
   return (
     // <div className="App">
@@ -151,7 +136,6 @@ const WefoxApp = () => {
             <TableTh>Lat</TableTh>
             <TableTh>Long</TableTh>
             <TableTh>Title</TableTh>
-            <TableTh>Image url</TableTh>
             <TableTh>Created At</TableTh>
             <TableTh>Updated At</TableTh>
             <TableTh>Action</TableTh>
@@ -163,25 +147,24 @@ const WefoxApp = () => {
             <TableTd>{el.lat}</TableTd>
             <TableTd>{el.long}</TableTd>
             <TableTd>{el.title}</TableTd>
-            <TableTd>{el.image_url}</TableTd>
             <TableTd>{el.created_at}</TableTd>
             <TableTd>{el.updated_at}</TableTd>
             {/* <TableTd>{dayjs(el.create_date).format('YYYY-MM-DD HH:mm:ss')}</TableTd> */}
             <TableTd>
             <div style={{display: 'flex', flexDirection: 'row'}}>
               <DeleteButton type='button' onClick={() => handleClickDelete(el.id)}>Delete</DeleteButton>
-              {/* <ModifyButton type='button' onClick={() => handleClickModal(el.name, el.lastName, el.id)}>Modify</ModifyButton> */}
+              <ModifyButton type='button' onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
             </div>
             </TableTd>
           </TableTr>
         )}
+        
         <TableTr>
           <TableTd>Id example</TableTd>
           <TableTd>Content example</TableTd>
           <TableTd>Lat example</TableTd>
           <TableTd>Long example</TableTd>
           <TableTd>Title example</TableTd>
-          <TableTd>Image url example</TableTd>
           <TableTd>Creation date example</TableTd>
           <TableTd>Update date example</TableTd>
           {/* <TableTd>{CREATE_DATE}</TableTd> */}
@@ -190,26 +173,28 @@ const WefoxApp = () => {
           </TableTd>
         </TableTr>
         </Table>
-        {isShowingModalAddUser
+        {isShowingModalAddCity
         && (
-          <ModalAddUser
-            setIsShowingModalAddUser={setIsShowingModalAddUser}
-            setAddName={setAddName}
-            setAddLastName={setAddLastName}
-            postUser={createWefoxData} 
+          <ModalAddCity
+          setIsShowingModalAddCity={setIsShowingModalAddCity}
+          setRefreshing={setRefreshing}
+          refreshing={refreshing}
+            // setAddCity={setAddCity}
+            // addCity={addCity}
+            // setAddName={setAddName}
+            // setAddLastName={setAddLastName}
+            // createWefoxData={createWefoxData} 
           />
         )}
 
-        {isShowing 
+        {isShowingModalModifyCity 
         && (
-        <Modal 
-          setIsShowing={setIsShowing} 
-          patchName={patchName}
-          setPatchName={setPatchName}
-          patchLastName={patchLastName} 
-          setPatchLastName={setPatchLastName} 
-          userId={userId}
-          handleClickPatch={handleClickPatch}
+        <ModalModifyCity 
+        setPatchCity={setPatchCity}
+        patchCity={patchCity}
+        setIsShowingModalModifyCity={setIsShowingModalModifyCity}
+        setRefreshing={setRefreshing}
+        refreshing={refreshing}
          />
         )}
     </div>
