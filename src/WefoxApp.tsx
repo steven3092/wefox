@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './style.tsx';
-import ModalModifyCity from './modalModifyCity';
-import ModalAddCity from './modalAddCity'
-import Axios from 'axios';
+import ModalModifyCity from './modals/modalModifyCity';
+import ModalAddCity from './modals/modalAddCity'
+import Globe from './globe';
 import {
   Table,
   TableTh,
@@ -12,11 +10,11 @@ import {
   DeleteButton,
   ModifyButton,
   AddButton,
-} from './style';
+} from './styles';
 import {
   fetchWefoxDataList,
   removeWefoxDataList
-} from './api-request';
+} from './helpers/api-requests';
 
 const WefoxApp = () => {
   const [listOfCities, setListOfCities] = useState([{
@@ -35,67 +33,29 @@ const WefoxApp = () => {
     long: '',
     title: '',
   });
-  const [patchName, setPatchName] = useState('');
-  const [patchLastName, setPatchLastName] = useState('');
-  const [userId, setUserId] = useState(0);
-  const [isShowing, setIsShowing] = useState(false);
   const [isShowingModalAddCity, setIsShowingModalAddCity] = useState<boolean>(false);
   const [isShowingModalModifyCity, setIsShowingModalModifyCity] = useState<boolean>(false);
+  const [isShowingGlobe, setIsShowingGlobe] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false)
 
-
-  // const fetchWefoxDataShow = async () : Promise<any> => {
-  //   try {
-  //   const url = 'http://localhost:3000/api/v1/posts/1';
-  //   const header = { headers: { Accept: 'application/json' } };
-  //   const { data } = await Axios.get(url, header);
-  //   console.log('dataShow:', data);  
-  //   return data;
-  //   } catch (err) {
-  //     console.log(err);
-  //     return err;
-  //   }
-  // };
-
-
-
-  const updateWefoxData = async (id: number) : Promise<any> => {
-    try {
-    const url = `http://localhost:3000/api/v1/posts/${id}`;
-    const header = { headers: { Accept: 'application/json' } };
-    const { data } = await Axios.put(url, header);
-    console.log('data:', data);  
-    return data;
-    } catch (err) {
-      console.log(err);
-      return err;
-    }
-  };
-
-
+  console.log(listOfCities);
+  
   useEffect(() => {
     fetchWefoxDataList(setListOfCities);
-    // fetchWefoxDataShow();
   }, [refreshing]);
-
 
   const handleClickDelete = (id: number) => {
     removeWefoxDataList(id);
     setRefreshing(!refreshing);
   };
   
-  const handleClickPatch = (id: number) => {
-    updateWefoxData(id);
-  };
-  
-  
-  // const handleClickModal = (content: string, lat: string, long: string, title: string, id: number) => {
-  //   setIsShowing(true);
-  //   setPatchLastName(lastName);
-  //   setPatchName(name);
-  //   setUserId(id);
-  // };
-  const handleClickModalModifyCity = (id: number, content: string, lat: string, long: string, title: string) => {
+  const handleClickModalModifyCity = (
+    id: number, 
+    content: string, 
+    lat: string, 
+    long: string, 
+    title: string
+    ) => {
     setPatchCity({
       id: id,
       content: content,
@@ -109,26 +69,16 @@ const WefoxApp = () => {
   const handleClickModalAddUser = () => {
     setIsShowingModalAddCity(true);
   };
-console.log('listOfCities', listOfCities);
+
+  const handleClickGlobe = () => {
+    setIsShowingGlobe(true);
+  };
 
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
     <div>
+      <ModifyButton onClick={() => handleClickGlobe()}>
+      Show the globe
+      </ModifyButton>
         <Table>
           <tr>
             <TableTh>Id</TableTh>
@@ -138,7 +88,7 @@ console.log('listOfCities', listOfCities);
             <TableTh>Title</TableTh>
             <TableTh>Created At</TableTh>
             <TableTh>Updated At</TableTh>
-            <TableTh>Action</TableTh>
+            <TableTh>Actions</TableTh>
           </tr>
       {listOfCities.map(el =>
           <TableTr>
@@ -149,11 +99,10 @@ console.log('listOfCities', listOfCities);
             <TableTd>{el.title}</TableTd>
             <TableTd>{el.created_at}</TableTd>
             <TableTd>{el.updated_at}</TableTd>
-            {/* <TableTd>{dayjs(el.create_date).format('YYYY-MM-DD HH:mm:ss')}</TableTd> */}
             <TableTd>
             <div style={{display: 'flex', flexDirection: 'row'}}>
-              <DeleteButton type='button' onClick={() => handleClickDelete(el.id)}>Delete</DeleteButton>
-              <ModifyButton type='button' onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
+              <DeleteButton onClick={() => handleClickDelete(el.id)}>Delete</DeleteButton>
+              <ModifyButton onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
             </div>
             </TableTd>
           </TableTr>
@@ -167,9 +116,8 @@ console.log('listOfCities', listOfCities);
           <TableTd>Title example</TableTd>
           <TableTd>Creation date example</TableTd>
           <TableTd>Update date example</TableTd>
-          {/* <TableTd>{CREATE_DATE}</TableTd> */}
           <TableTd>
-            <AddButton type='button' onClick={() => handleClickModalAddUser()}>Add a new city</AddButton>
+            <AddButton onClick={() => handleClickModalAddUser()}>Add a new city</AddButton>
           </TableTd>
         </TableTr>
         </Table>
@@ -178,12 +126,7 @@ console.log('listOfCities', listOfCities);
           <ModalAddCity
           setIsShowingModalAddCity={setIsShowingModalAddCity}
           setRefreshing={setRefreshing}
-          refreshing={refreshing}
-            // setAddCity={setAddCity}
-            // addCity={addCity}
-            // setAddName={setAddName}
-            // setAddLastName={setAddLastName}
-            // createWefoxData={createWefoxData} 
+          refreshing={refreshing} 
           />
         )}
 
@@ -197,6 +140,14 @@ console.log('listOfCities', listOfCities);
         refreshing={refreshing}
          />
         )}
+
+        {/* {isShowingGlobe
+        && (
+        <Globe
+        setIsShowingGlobe={setIsShowingGlobe}
+        listOfCities={listOfCities}
+        />
+        )} */}
     </div>
   );
 }

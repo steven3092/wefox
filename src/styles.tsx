@@ -27,6 +27,12 @@ export const ModalHeader = styled.div`
     background-color: #0066ff;
 `
 
+export const ModalHeaderGlobe = styled.div`
+    width: auto;
+    height: auto;
+    background-color: transparent;
+`
+
 export const Input = styled.input`
     width: 100%;
     padding: 12px 20px;
@@ -64,7 +70,7 @@ export const InputSubmit = styled.input`
     background-color: #fefefe;
     margin: 1% auto;
     padding: 20px;
-    width: 92%;
+    width: auto;
   `
 
   export const Table = styled.table`
@@ -158,9 +164,10 @@ export const AddButton = styled.button`
 `
 
 export const CloseButton = styled.button`
-    display: 'flex';
-    justify-content: 'right';
-    color: 'white';
-    margin-right: '8px';
-    cursor: 'pointer'
+    // display: flex
+    // justify-content: right;
+    color: black;
+    margin-right: 8px;
+    cursor: pointer;
+    right: 0px;
 `

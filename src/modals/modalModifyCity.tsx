@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import type { FC } from 'react';
 import {
   Container,
@@ -9,70 +8,63 @@ import {
   InputSubmit,
   TextArea,
   CloseButton,
-} from './style'
+} from '../styles';
 import {
-  createWefoxData
-} from './api-request';
-
+  patchWefoxDataList
+} from '../helpers/api-requests';
 
 interface Props {
-  setIsShowingModalAddCity?: any;
+  setPatchCity?: any;
+  patchCity?: any;
+  setIsShowingModalModifyCity?: any;
   setRefreshing?: any;
   refreshing?: any;
 }
 
-const ModalAddCity: FC<Props> = ({
-  setIsShowingModalAddCity,
+
+const ModalModifyCity: FC<Props> = ({
+  setPatchCity,
+  patchCity,
+  setIsShowingModalModifyCity,
   setRefreshing,
   refreshing,
-}) => {
-  const [addCity, setAddCity] = useState({
-    content: '',
-    lat: '',
-    long: '',
-    title: '',
-    image_url:'',
-    created_at: '',
-    updated_at: '',
-  });
-  return (
-        <>
+}) => 
+       <>
           <Container>
             <ModalBorder>
             <div className="modal">
               <ModalHeader>
-              <CloseButton type='button' onClick={() => setIsShowingModalAddCity(false)}>
+              <CloseButton onClick={() => setIsShowingModalModifyCity(false)} >
                     X
                   </CloseButton>
                 <div style={{display: 'flex', justifyContent: 'center', color: 'white'}}>
-                  <h4>Add a new city</h4>
+                  <h4>Modify the current user</h4>
                 </div>
-              </ModalHeader>
               <Content>
               <form onSubmit={(e) => {
                 e.preventDefault();
-                createWefoxData(addCity);
-                setIsShowingModalAddCity(false);
+                patchWefoxDataList(patchCity);
+                setIsShowingModalModifyCity(false);
                 setRefreshing(!refreshing);
               }}>
                 <div>
-                  Content : <TextArea onChange={(e: any) => {
-                    setAddCity({...addCity, content: e.target.value});
+                  Content : <TextArea value={patchCity.content} onChange={(e: any) => {
+                    setPatchCity({...patchCity, content: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Lat : <Input onChange={(e: any) => {
-                    setAddCity({...addCity, lat: e.target.value});
+                  Lat : <Input value={patchCity.lat} onChange={(e: any) => {
+                    setPatchCity({...patchCity, lat: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Long : <Input onChange={(e: any) => {
-                    setAddCity({...addCity, long: e.target.value});
+                  Long : <Input value={patchCity.long} onChange={(e: any) => {
+                    setPatchCity({...patchCity, long: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Title : <Input onChange={(e: any) => {
-                    setAddCity({...addCity, title: e.target.value});
+                  Title : <Input value={patchCity.title} onChange={(e: any) => {
+                    setPatchCity({...patchCity, title: e.target.value});
                   }}/>
                 </div>
                 <div>
@@ -80,11 +72,10 @@ const ModalAddCity: FC<Props> = ({
                 </div>
               </form>
               </Content>
+              </ModalHeader>
             </div>
             </ModalBorder>
           </Container>
         </>
-  );
-}
-
-export default ModalAddCity;
+        
+export default ModalModifyCity;
