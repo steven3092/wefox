@@ -4,7 +4,7 @@ https://frabjous-crostata-beaebb.netlify.app/
 
 To get data from the docker image provided by Wefox,
 run locally the container by running the command `docker-compose up` 
-and then `npm start` to run the server on the port 3000
+and then `npm start` to run the server on the port 3000.
 
 You'll get data in the app on your browser.
 
@@ -32,7 +32,8 @@ I've tried to see with Babel but still and it works in production because the br
 
 So I didn't do test on the globe, but I did on the table.
 
-I recommend to put on comment : in src/wefox-app.tsx
+I recommend to put on comment (in src/wefox-app.tsx) : 
+
 `{isShowingGlobe
         && (
         <Globe
@@ -40,8 +41,9 @@ I recommend to put on comment : in src/wefox-app.tsx
         listOfCities={listOfCities}
         />
         )}`
+ 
 And then you can run the tests with the command `npm test`.
 
 Hope you'll enjoy it !
 
-PS: If you have an idea with the issue I have with the globe by running test, do not hesitate.
+PS: If you have any idea with the issue I have with the globe by running test, do not hesitate.
