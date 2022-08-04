@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import ModalModifyCity from './modals/modalModifyCity';
-import ModalAddCity from './modals/modalAddCity'
+import { useEffect, useState } from 'react';
+import ModalModifyCity from './modals/modal-modify-city';
+import ModalAddCity from './modals/modal-add-city'
 import Globe from './globe';
 import {
   Table,
@@ -26,7 +26,7 @@ const WefoxApp = () => {
     created_at: '',
     updated_at: '',
   }]);
-  const [patchCity, setPatchCity] = useState({
+  const [patchCity, setPatchCity] = useState<object>({
     id: 0,
     content: '',
     lat: '',
@@ -37,8 +37,6 @@ const WefoxApp = () => {
   const [isShowingModalModifyCity, setIsShowingModalModifyCity] = useState<boolean>(false);
   const [isShowingGlobe, setIsShowingGlobe] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false)
-
-  console.log(listOfCities);
   
   useEffect(() => {
     fetchWefoxDataList(setListOfCities);
@@ -79,7 +77,7 @@ const WefoxApp = () => {
       <ModifyButton onClick={() => handleClickGlobe()}>
       Show the globe
       </ModifyButton>
-        <Table>
+        <Table data-testid="table-element">
           <tr>
             <TableTh>Id</TableTh>
             <TableTh>Content</TableTh>
@@ -102,7 +100,7 @@ const WefoxApp = () => {
             <TableTd>
             <div style={{display: 'flex', flexDirection: 'row'}}>
               <DeleteButton onClick={() => handleClickDelete(el.id)}>Delete</DeleteButton>
-              <ModifyButton onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
+              <ModifyButton data-testid="button-modify-city" onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
             </div>
             </TableTd>
           </TableTr>
@@ -117,7 +115,7 @@ const WefoxApp = () => {
           <TableTd>Creation date example</TableTd>
           <TableTd>Update date example</TableTd>
           <TableTd>
-            <AddButton onClick={() => handleClickModalAddUser()}>Add a new city</AddButton>
+            <AddButton data-testid="button-add-city" onClick={() => handleClickModalAddUser()}>Add a new city</AddButton>
           </TableTd>
         </TableTr>
         </Table>
@@ -129,7 +127,6 @@ const WefoxApp = () => {
           refreshing={refreshing} 
           />
         )}
-
         {isShowingModalModifyCity 
         && (
         <ModalModifyCity 
@@ -140,14 +137,13 @@ const WefoxApp = () => {
         refreshing={refreshing}
          />
         )}
-
-        {/* {isShowingGlobe
+        {isShowingGlobe
         && (
         <Globe
         setIsShowingGlobe={setIsShowingGlobe}
         listOfCities={listOfCities}
         />
-        )} */}
+        )}
     </div>
   );
 }

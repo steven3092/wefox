@@ -9,6 +9,7 @@ import {
   InputSubmit,
   TextArea,
   CloseButton,
+  Title,
 } from '../styles'
 import {
   createWefoxData
@@ -45,7 +46,7 @@ const ModalAddCity: FC<Props> = ({
                     X
                   </CloseButton>
                 <div style={{display: 'flex', justifyContent: 'center', color: 'white'}}>
-                  <h4>Add a new city</h4>
+                  <Title>Modal window : Add a new city</Title>
                 </div>
               <Content>
               <form onSubmit={(e) => {

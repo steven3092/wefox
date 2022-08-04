@@ -8,6 +8,7 @@ import {
   InputSubmit,
   TextArea,
   CloseButton,
+  Title,
 } from '../styles';
 import {
   patchWefoxDataList
@@ -38,7 +39,7 @@ const ModalModifyCity: FC<Props> = ({
                     X
                   </CloseButton>
                 <div style={{display: 'flex', justifyContent: 'center', color: 'white'}}>
-                  <h4>Modify the current user</h4>
+                  <Title>Modal window : Modify the current city</Title>
                 </div>
               <Content>
               <form onSubmit={(e) => {

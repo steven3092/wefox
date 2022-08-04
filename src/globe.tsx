@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { FC } from 'react';
 import EarthGlobe from 'react-globe.gl';
 import {
     datasetBuild
-} from './helpers/globe-helpers';
+} from './helpers/helpers';
 import {
     Container,
     CloseButton,
@@ -24,10 +24,7 @@ const Globe: FC<Props> = ({
 
     const handleClickShowCities = () => (
         setMarkers(datasetBuild(listOfCities))
-    );
-
-    console.log('markers', markers);
-    
+    );  
         
   const getTooltip = (d: any) => `
   <div style="text-align: center">

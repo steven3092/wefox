@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import WefoxApp from './WefoxApp';
+import WefoxApp from './wefox-app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

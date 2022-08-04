@@ -78,6 +78,9 @@ export const InputSubmit = styled.input`
     border-collapse: collapse;
     width: 100%;
 `
+ export const Title = styled.h4`
+    font-family: Arial, Helvetica, sans-serif;
+    `
   export const TableTh = styled.th`
     padding-top: 12px;
     padding-bottom: 12px;
