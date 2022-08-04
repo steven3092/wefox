@@ -9,6 +9,7 @@ import {
   TextArea,
   CloseButton,
   Title,
+  Form,
 } from '../styles';
 import {
   patchWefoxDataList
@@ -29,25 +30,29 @@ const ModalModifyCity: FC<Props> = ({
   setIsShowingModalModifyCity,
   setRefreshing,
   refreshing,
-}) => 
+}) => {
+
+  const handleSubmitForm = (e: any) => {
+    e.preventDefault();
+    patchWefoxDataList(patchCity);
+    setIsShowingModalModifyCity(false);
+    setRefreshing(!refreshing);
+  };
+
+  return (  
        <>
           <Container>
             <ModalBorder>
             <div className="modal">
               <ModalHeader>
-              <CloseButton onClick={() => setIsShowingModalModifyCity(false)} >
+              <CloseButton type='button' onClick={() => setIsShowingModalModifyCity(false)} >
                     X
                   </CloseButton>
                 <div style={{display: 'flex', justifyContent: 'center', color: 'white'}}>
-                  <Title>Modal window : Modify the current city</Title>
+                  <Title>Info : Modify the current city</Title>
                 </div>
               <Content>
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                patchWefoxDataList(patchCity);
-                setIsShowingModalModifyCity(false);
-                setRefreshing(!refreshing);
-              }}>
+              <Form onSubmit={(e) => handleSubmitForm(e)}>
                 <div>
                   Content : <TextArea value={patchCity.content} onChange={(e: any) => {
                     setPatchCity({...patchCity, content: e.target.value});
@@ -69,14 +74,16 @@ const ModalModifyCity: FC<Props> = ({
                   }}/>
                 </div>
                 <div>
-                  <InputSubmit type="submit" value={"Submit"}/>
+                  <InputSubmit type="submit" value={"Modify"}/>
                 </div>
-              </form>
+              </Form>
               </Content>
               </ModalHeader>
             </div>
             </ModalBorder>
           </Container>
         </>
+  );
+}
         
 export default ModalModifyCity;

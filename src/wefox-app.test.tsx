@@ -74,14 +74,14 @@ describe('Click button should open modal', () =>{
     render(<App />);
     const button = screen.getByTestId('button-add-city')
     fireEvent.click(button)
-    expect(screen.getByText('Modal window : Add a new city')).not.toBeNull();
+    expect(screen.getByText('Info : Add a new city')).not.toBeNull();
   });
 
   test('If click button "Modify" opens the modal', () => {
     render(<App />);
     const button = screen.getByTestId('button-modify-city')
     fireEvent.click(button)
-    expect(screen.getByText('Modal window : Modify the current city')).not.toBeNull();
+    expect(screen.getByText('Info : Modify the current city')).not.toBeNull();
   });
 });
 

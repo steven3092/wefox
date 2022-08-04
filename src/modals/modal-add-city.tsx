@@ -10,6 +10,7 @@ import {
   TextArea,
   CloseButton,
   Title,
+  Form,
 } from '../styles'
 import {
   createWefoxData
@@ -36,25 +37,28 @@ const ModalAddCity: FC<Props> = ({
     created_at: '',
     updated_at: '',
   });
+
+  const handleSubmitForm = (e: any) => {
+    e.preventDefault();
+    createWefoxData(addCity);
+    setIsShowingModalAddCity(false);
+    setRefreshing(!refreshing);
+  };
+
   return (
         <>
           <Container>
             <ModalBorder>
             <div className="modal">
               <ModalHeader>
-              <CloseButton onClick={() => setIsShowingModalAddCity(false)}>
+              <CloseButton type='button' onClick={() => setIsShowingModalAddCity(false)}>
                     X
                   </CloseButton>
                 <div style={{display: 'flex', justifyContent: 'center', color: 'white'}}>
-                  <Title>Modal window : Add a new city</Title>
+                  <Title>Info : Add a new city</Title>
                 </div>
               <Content>
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                createWefoxData(addCity);
-                setIsShowingModalAddCity(false);
-                setRefreshing(!refreshing);
-              }}>
+              <Form onSubmit={(e) => handleSubmitForm(e)}>
                 <div>
                   Content : <TextArea onChange={(e: any) => {
                     setAddCity({...addCity, content: e.target.value});
@@ -78,7 +82,7 @@ const ModalAddCity: FC<Props> = ({
                 <div>
                   <InputSubmit type="submit" value={"Submit"}/>
                 </div>
-              </form>
+              </Form>
               </Content>
               </ModalHeader>
             </div>

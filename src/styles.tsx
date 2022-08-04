@@ -22,6 +22,8 @@ export const ModalBorder = styled.div`
 `
 
 export const ModalHeader = styled.div`
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     background-color: #0066ff;
@@ -67,8 +69,9 @@ export const InputSubmit = styled.input`
   
   /* Modal Content/Box */
   export const Content = styled.div`
+    display: flex;
+    flex-direction: column;
     background-color: #fefefe;
-    margin: 1% auto;
     padding: 20px;
     width: auto;
   `
@@ -100,6 +103,14 @@ export const InputSubmit = styled.input`
       background-color: #f2f2f2;
     }
 `
+
+export const Form = styled.form`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: auto;
+`
+
 export const DeleteButton = styled.button`
     margin: 0 auto;
     padding: 0.25rem 1.5rem;
@@ -167,10 +178,10 @@ export const AddButton = styled.button`
 `
 
 export const CloseButton = styled.button`
-    // display: flex
-    // justify-content: right;
-    color: black;
-    margin-right: 8px;
+    display: flex;
+    justify-content: end;
+    color: white;
     cursor: pointer;
-    right: 0px;
+    background-color: #0066ff;
+    border: 1px solid transparent;
 `

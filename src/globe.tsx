@@ -38,8 +38,8 @@ const Globe: FC<Props> = ({
         <div>
         <ModalHeaderGlobe>
             <div style={{display: 'flex', justifyContent: 'center'}}>
+                <ModifyButton onClick={() => handleClickShowCities()}>Show cities</ModifyButton>*
                 <CloseButton onClick={() => setIsShowingGlobe(false)} >X</CloseButton>
-                <ModifyButton onClick={() => handleClickShowCities()}>Show cities</ModifyButton>
             </div>
                 <EarthGlobe
                     globeImageUrl={'https://unpkg.com/three-globe@2.18.5/example/img/earth-blue-marble.jpg'}
