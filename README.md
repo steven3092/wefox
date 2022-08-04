@@ -28,7 +28,7 @@ You can run tests with command `npm test`.
 There is an issue because of the react-globe.gl library. 
 react-globe.gl uses three.js and when Jest try to compile the code in its virtual DOM,
 it is not able to understand the js or ts file imported inside because of ternary expression.
-I've tried to see with Babel but still and it works in production because the browser is able to read ternary expressions.
+I've tried to see with Babel but still and it works in production/development because the browser is able to read ternary expressions.
 
 So I didn't do test on the globe, but I did on the table.
 
