@@ -73,10 +73,10 @@ const WefoxApp = () => {
   };
 
   return (
-    <div>
-      <ModifyButton onClick={() => handleClickGlobe()}>
-      Show the globe
-      </ModifyButton>
+    <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>  
+        <ModifyButton onClick={() => handleClickGlobe()}>
+          Show the globe
+        </ModifyButton>
         <Table data-testid="table-element">
           <tr>
             <TableTh>Id</TableTh>
@@ -98,7 +98,7 @@ const WefoxApp = () => {
             <TableTd>{el.created_at}</TableTd>
             <TableTd>{el.updated_at}</TableTd>
             <TableTd>
-            <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
               <DeleteButton onClick={() => handleClickDelete(el.id)}>Delete</DeleteButton>
               <ModifyButton data-testid="button-modify-city" onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
             </div>

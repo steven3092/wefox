@@ -113,7 +113,7 @@ export const Form = styled.form`
 
 export const DeleteButton = styled.button`
     margin: 0 auto;
-    padding: 0.25rem 1.5rem;
+    padding: 0.25rem 2.5rem;
     display: flex;
     background-color: #ff4d4d;
     border: 1px solid transparent;
@@ -135,7 +135,7 @@ export const DeleteButton = styled.button`
 
 export const ModifyButton = styled.button`
     margin: 0 auto;
-    padding: 0.25rem 1.5rem;
+    padding: 0.25rem 2.4rem;
     display: flex;
     background-color: #6699ff;
     border: 1px solid transparent;
