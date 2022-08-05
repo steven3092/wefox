@@ -50,7 +50,7 @@ export const removeWefoxDataList = async (id: number) : Promise<Promise<any>> =>
   };
 
 
-export const patchWefoxDataList = async (formData: {id: number}) : Promise<any> => {
+export const patchWefoxDataList = async (formData: {id: number}) : Promise<Promise<any>> => {
     try {
     const { data } = await Axios({
         method: 'put',
