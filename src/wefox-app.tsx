@@ -17,26 +17,42 @@ import {
 } from './helpers/api-requests';
 
 const WefoxApp = () => {
-  const [listOfCities, setListOfCities] = useState([{
+  const [listOfCities, setListOfCities] = useState<[{
+    id: number, 
+    content: string, 
+    lat: string, 
+    long: string,
+    title: string,
+    image_url: string,
+    created_at: string,
+    updated_at: string,
+  }]>([{
     id: 0,
     content: '',
     lat: '',
     long: '',
     title: '',
+    image_url: '',
     created_at: '',
     updated_at: '',
   }]);
-  const [patchCity, setPatchCity] = useState<object>({
+  const [patchCity, setPatchCity] = useState<{
+    id: number,
+    content: string,
+    lat: string,
+    long: string,
+    title: string,
+  }>({
     id: 0,
     content: '',
     lat: '',
     long: '',
     title: '',
   });
-  const [isShowingModalAddCity, setIsShowingModalAddCity] = useState<boolean>(false);
-  const [isShowingModalModifyCity, setIsShowingModalModifyCity] = useState<boolean>(false);
-  const [isShowingGlobe, setIsShowingGlobe] = useState<boolean>(false);
-  const [refreshing, setRefreshing] = useState<boolean>(false)
+  const [isShowingModalAddCity, setIsShowingModalAddCity] = useState<boolean | null>(false);
+  const [isShowingModalModifyCity, setIsShowingModalModifyCity] = useState<boolean | null>(false);
+  const [isShowingGlobe, setIsShowingGlobe] = useState<boolean | null>(false);
+  const [refreshing, setRefreshing] = useState<boolean | null>(false)
   
   useEffect(() => {
     fetchWefoxDataList(setListOfCities);
@@ -88,7 +104,7 @@ const WefoxApp = () => {
             <TableTh>Updated At</TableTh>
             <TableTh>Actions</TableTh>
           </tr>
-      {listOfCities.map(el =>
+      {listOfCities.map((el) =>
           <TableTr>
             <TableTd>{el.id}</TableTd>
             <TableTd>{el.content}</TableTd>
@@ -137,6 +153,10 @@ const WefoxApp = () => {
         refreshing={refreshing}
          />
         )}
+
+        {/* Comment the following block of code for running tests, 
+        I have an issue with globe library for running test.
+        See the Readme on my github: https://github.com/steven3092/wefox */}
         {isShowingGlobe
         && (
         <Globe

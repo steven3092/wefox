@@ -1,6 +1,15 @@
 import Axios from 'axios';
 
-export const fetchWefoxDataList = async (setListOfCities: any) : Promise<any> => {
+export const fetchWefoxDataList = async (setListOfCities: React.Dispatch<React.SetStateAction<[{
+    id: number;
+    content: string;
+    lat: string;
+    long: string;
+    title: string;
+    image_url: string;
+    created_at: string;
+    updated_at: string;
+}]>>) : Promise<Promise<any>> => {
     try {
     const url = 'http://localhost:3000/api/v1/posts';
     const header = { headers: { Accept: 'application/json' } };
@@ -13,7 +22,7 @@ export const fetchWefoxDataList = async (setListOfCities: any) : Promise<any> =>
     }
   };
 
-export const createWefoxData = async (formData: any) : Promise<any> => {
+export const createWefoxData = async (formData: object) : Promise<Promise<any>> => {
     try {
     const data = await Axios({
         method: 'post',
@@ -28,7 +37,7 @@ export const createWefoxData = async (formData: any) : Promise<any> => {
     }
   };
 
-export const removeWefoxDataList = async (id: number) : Promise<any> => {
+export const removeWefoxDataList = async (id: number) : Promise<Promise<any>> => {
     try {
     const url = `http://localhost:3000/api/v1/posts/${id}`;
     const header = { headers: { Accept: 'application/json' } };
@@ -41,7 +50,7 @@ export const removeWefoxDataList = async (id: number) : Promise<any> => {
   };
 
 
-export const patchWefoxDataList = async (formData: any) : Promise<any> => {
+export const patchWefoxDataList = async (formData: {id: number}) : Promise<any> => {
     try {
     const { data } = await Axios({
         method: 'put',

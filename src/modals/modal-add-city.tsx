@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import type { FC } from 'react';
 import {
   Container,
@@ -18,9 +18,9 @@ import {
 
 
 interface Props {
-  setIsShowingModalAddCity?: any;
-  setRefreshing?: any;
-  refreshing?: any;
+  setIsShowingModalAddCity: React.Dispatch<React.SetStateAction<boolean | null >>;
+  setRefreshing: React.Dispatch<React.SetStateAction<boolean | null>>;
+  refreshing: boolean | null;
 }
 
 const ModalAddCity: FC<Props> = ({
@@ -28,7 +28,7 @@ const ModalAddCity: FC<Props> = ({
   setRefreshing,
   refreshing,
 }) => {
-  const [addCity, setAddCity] = useState({
+  const [addCity, setAddCity] = useState<object>({
     content: '',
     lat: '',
     long: '',
@@ -60,22 +60,22 @@ const ModalAddCity: FC<Props> = ({
               <Content>
               <Form onSubmit={(e) => handleSubmitForm(e)}>
                 <div>
-                  Content : <TextArea onChange={(e: any) => {
+                  Content : <TextArea required onChange={(e) => {
                     setAddCity({...addCity, content: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Lat : <Input onChange={(e: any) => {
+                  Lat : <Input required onChange={(e) => {
                     setAddCity({...addCity, lat: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Long : <Input onChange={(e: any) => {
+                  Long : <Input required onChange={(e) => {
                     setAddCity({...addCity, long: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Title : <Input onChange={(e: any) => {
+                  Title : <Input required onChange={(e) => {
                     setAddCity({...addCity, title: e.target.value});
                   }}/>
                 </div>

@@ -16,11 +16,23 @@ import {
 } from '../helpers/api-requests';
 
 interface Props {
-  setPatchCity?: any;
-  patchCity?: any;
-  setIsShowingModalModifyCity?: any;
-  setRefreshing?: any;
-  refreshing?: any;
+  setPatchCity: React.Dispatch<React.SetStateAction< {
+    id: number;
+    content: string;
+    lat: string;
+    long: string;
+    title: string;
+  }>>;
+  patchCity: {
+    id: number;
+    content: string;
+    lat: string;
+    long: string;
+    title: string;
+  };
+  setIsShowingModalModifyCity: React.Dispatch<React.SetStateAction<boolean | null>>;
+  setRefreshing: React.Dispatch<React.SetStateAction<boolean | null>>;
+  refreshing: boolean | null;
 }
 
 
@@ -54,22 +66,22 @@ const ModalModifyCity: FC<Props> = ({
               <Content>
               <Form onSubmit={(e) => handleSubmitForm(e)}>
                 <div>
-                  Content : <TextArea value={patchCity.content} onChange={(e: any) => {
+                  Content : <TextArea required value={patchCity.content} onChange={(e) => {
                     setPatchCity({...patchCity, content: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Lat : <Input value={patchCity.lat} onChange={(e: any) => {
+                  Lat : <Input required value={patchCity.lat} onChange={(e) => {
                     setPatchCity({...patchCity, lat: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Long : <Input value={patchCity.long} onChange={(e: any) => {
+                  Long : <Input required value={patchCity.long} onChange={(e) => {
                     setPatchCity({...patchCity, long: e.target.value});
                   }}/>
                 </div>
                 <div>
-                  Title : <Input value={patchCity.title} onChange={(e: any) => {
+                  Title : <Input required value={patchCity.title} onChange={(e) => {
                     setPatchCity({...patchCity, title: e.target.value});
                   }}/>
                 </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { FC } from 'react';
 import EarthGlobe from 'react-globe.gl';
 import {
@@ -7,24 +7,48 @@ import {
 import {
     Container,
     CloseButton,
-    ModifyButton,
     ModalHeaderGlobe,
 } from './styles';
-
 interface Props {
-    setIsShowingGlobe?: any;
-    listOfCities?: any;
+    setIsShowingGlobe: React.Dispatch<React.SetStateAction<boolean | null>>;
+    listOfCities: [{
+        id: number;
+        content: string; 
+        lat: string;
+        long: string;
+        title: string;
+        image_url: string;
+        created_at: string;
+        updated_at: string;
+      }];
   }
 
 const Globe: FC<Props> = ({
     setIsShowingGlobe,
     listOfCities,
 }) => {
-    const [markers, setMarkers] = useState<any>([]);
-
-    const handleClickShowCities = () => (
+    const [markers, setMarkers] = useState<{
+        id: string | number;
+        content: string;
+        color: string;
+        lat: string | number;
+        lon: string | number;
+        title: string;
+        value: number;
+    }[]>([{
+        id: 0,
+        content: '',
+        color: '',
+        lat: 0,
+        lon: 0,
+        title: '',
+        value: 0,
+    }]);
+    
+    useEffect(() => {
         setMarkers(datasetBuild(listOfCities))
-    );  
+    }, [listOfCities]);
+ 
         
   const getTooltip = (d: any) => `
   <div style="text-align: center">
@@ -37,8 +61,7 @@ const Globe: FC<Props> = ({
     <Container>
         <div>
         <ModalHeaderGlobe>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-                <ModifyButton onClick={() => handleClickShowCities()}>Show cities</ModifyButton>*
+            <div style={{display: 'flex', justifyContent: 'end'}}>
                 <CloseButton onClick={() => setIsShowingGlobe(false)} >X</CloseButton>
             </div>
                 <EarthGlobe
