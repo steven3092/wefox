@@ -5,4 +5,13 @@ services:
     image: wefoxgroup/wg-web-challenge:latest
     container_name: wg-web-challenge
     ports:
-      - 3000:3000
+      - "3000:3000"
+    environment:
+      - PORT=3000
+  wefoxapp:
+    image: wefoximage
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+

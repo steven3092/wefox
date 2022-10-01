@@ -60,6 +60,11 @@ const ModalAddCity: FC<Props> = ({
               <Content>
               <Form onSubmit={(e) => handleSubmitForm(e)}>
                 <div>
+                  Title : <Input required onChange={(e) => {
+                    setAddCity({...addCity, title: e.target.value});
+                  }}/>
+                </div>
+                <div>
                   Content : <TextArea required onChange={(e) => {
                     setAddCity({...addCity, content: e.target.value});
                   }}/>
@@ -72,11 +77,6 @@ const ModalAddCity: FC<Props> = ({
                 <div>
                   Long : <Input required onChange={(e) => {
                     setAddCity({...addCity, long: e.target.value});
-                  }}/>
-                </div>
-                <div>
-                  Title : <Input required onChange={(e) => {
-                    setAddCity({...addCity, title: e.target.value});
                   }}/>
                 </div>
                 <div>

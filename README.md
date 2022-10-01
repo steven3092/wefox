@@ -14,7 +14,20 @@ You can get the project by cloning this one : `https://github.com/steven3092/wef
 
 When you get the project directory, you can run:
 
-### `npm start`
+#### Run the project with docker compose
+
+### `docker build -t wefoximage .`
+
+To build the image that you can see in the dockerfile. I EXPOSE on the port 4000 on purpose because the database image from Wefox is exposed on the port 3000.
+
+### `docker-compose up`
+
+To start the different services that you can see in the docker-compose.yml
+
+Then :
+        - Go to http://localhost/4000, to see the project
+        - If you go on the http://localhost/3000, you'll get to the rubyOnRail page which is where th database is located.
+### `npm start` To run the project locally
 
 It'll run locally the app in the development mode on the port 4000.
 (Open [http://localhost:4000](http://localhost:4000) to view it in the browser)

@@ -66,6 +66,11 @@ const ModalModifyCity: FC<Props> = ({
               <Content>
               <Form onSubmit={(e) => handleSubmitForm(e)}>
                 <div>
+                  Title : <Input required value={patchCity.title} onChange={(e) => {
+                    setPatchCity({...patchCity, title: e.target.value});
+                  }}/>
+                </div>
+                <div>
                   Content : <TextArea required value={patchCity.content} onChange={(e) => {
                     setPatchCity({...patchCity, content: e.target.value});
                   }}/>
@@ -78,11 +83,6 @@ const ModalModifyCity: FC<Props> = ({
                 <div>
                   Long : <Input required value={patchCity.long} onChange={(e) => {
                     setPatchCity({...patchCity, long: e.target.value});
-                  }}/>
-                </div>
-                <div>
-                  Title : <Input required value={patchCity.title} onChange={(e) => {
-                    setPatchCity({...patchCity, title: e.target.value});
                   }}/>
                 </div>
                 <div>
