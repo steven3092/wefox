@@ -94,46 +94,51 @@ const WefoxApp = () => {
           Show the globe
         </ModifyButton>
         <Table data-testid="table-element">
-          <tr>
-            <TableTh>Id</TableTh>
-            <TableTh>Content</TableTh>
-            <TableTh>Lat</TableTh>
-            <TableTh>Long</TableTh>
-            <TableTh>Title</TableTh>
-            <TableTh>Created At</TableTh>
-            <TableTh>Updated At</TableTh>
-            <TableTh>Actions</TableTh>
-          </tr>
-      {listOfCities.map((el) =>
-          <TableTr>
-            <TableTd>{el.id}</TableTd>
-            <TableTd>{el.content}</TableTd>
-            <TableTd>{el.lat}</TableTd>
-            <TableTd>{el.long}</TableTd>
-            <TableTd>{el.title}</TableTd>
-            <TableTd>{el.created_at}</TableTd>
-            <TableTd>{el.updated_at}</TableTd>
-            <TableTd>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-              <DeleteButton onClick={() => handleClickDelete(el.id)}>Delete</DeleteButton>
-              <ModifyButton data-testid="button-modify-city" onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
-            </div>
-            </TableTd>
-          </TableTr>
-        )}
-        
-        <TableTr>
-          <TableTd>Id example</TableTd>
-          <TableTd>Content example</TableTd>
-          <TableTd>Lat example</TableTd>
-          <TableTd>Long example</TableTd>
-          <TableTd>Title example</TableTd>
-          <TableTd>Creation date example</TableTd>
-          <TableTd>Update date example</TableTd>
-          <TableTd>
-            <AddButton data-testid="button-add-city" onClick={() => handleClickModalAddUser()}>Add a new city</AddButton>
-          </TableTd>
-        </TableTr>
+          <thead>
+            <tr>
+              <TableTh>Id</TableTh>
+              <TableTh>Content</TableTh>
+              <TableTh>Lat</TableTh>
+              <TableTh>Long</TableTh>
+              <TableTh>Title</TableTh>
+              <TableTh>Created At</TableTh>
+              <TableTh>Updated At</TableTh>
+              <TableTh>Actions</TableTh>
+            </tr>
+          </thead>
+          <tbody>
+          {listOfCities.map((el) =>
+              <TableTr key={el.title}>
+                <TableTd>{el.id}</TableTd>
+                <TableTd>{el.content}</TableTd>
+                <TableTd>{el.lat}</TableTd>
+                <TableTd>{el.long}</TableTd>
+                <TableTd>{el.title}</TableTd>
+                <TableTd>{el.created_at}</TableTd>
+                <TableTd>{el.updated_at}</TableTd>
+                <TableTd>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                  <DeleteButton onClick={() => handleClickDelete(el.id)}>Delete</DeleteButton>
+                  <ModifyButton data-testid="button-modify-city" onClick={() => handleClickModalModifyCity(el.id, el.content, el.lat, el.long, el.title)}>Modify</ModifyButton>
+                </div>
+                </TableTd>
+              </TableTr>
+            )}
+          </tbody>
+          <tfoot>
+            <TableTr>
+              <TableTd>Id example</TableTd>
+              <TableTd>Content example</TableTd>
+              <TableTd>Lat example</TableTd>
+              <TableTd>Long example</TableTd>
+              <TableTd>Title example</TableTd>
+              <TableTd>Creation date example</TableTd>
+              <TableTd>Update date example</TableTd>
+              <TableTd>
+                <AddButton data-testid="button-add-city" onClick={() => handleClickModalAddUser()}>Add a new city</AddButton>
+              </TableTd>
+            </TableTr>
+          </tfoot>
         </Table>
         {isShowingModalAddCity
         && (
