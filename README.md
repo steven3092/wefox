@@ -24,9 +24,7 @@ To build the image that you can see in the dockerfile. I EXPOSE on the port 4000
 
 To start the different services that you can see in the docker-compose.yml
 
-Then :
-        - Go to http://localhost/4000, to see the project
-        - If you go on the http://localhost/3000, you'll get to the rubyOnRail page which is where th database is located.
+Then, go to https://frabjous-crostata-beaebb.netlify.app/ or to http://localhost:4000 to see the project.
 ### `npm start` To run the project locally
 
 It'll run locally the app in the development mode on the port 4000.
