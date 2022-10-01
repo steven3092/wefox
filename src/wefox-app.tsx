@@ -60,7 +60,9 @@ const WefoxApp = () => {
 
   const handleClickDelete = (id: number) => {
     removeWefoxDataList(id);
-    setRefreshing(!refreshing);
+    setTimeout(() => {
+      setRefreshing(!refreshing);
+    }, 1000)
   };
   
   const handleClickModalModifyCity = (

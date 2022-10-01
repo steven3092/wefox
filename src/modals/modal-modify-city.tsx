@@ -48,7 +48,9 @@ const ModalModifyCity: FC<Props> = ({
     e.preventDefault();
     patchWefoxDataList(patchCity);
     setIsShowingModalModifyCity(false);
-    setRefreshing(!refreshing);
+    setTimeout(() => {
+      setRefreshing(!refreshing);
+    }, 1000)
   };
 
   return (  

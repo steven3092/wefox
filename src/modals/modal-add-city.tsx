@@ -42,7 +42,9 @@ const ModalAddCity: FC<Props> = ({
     e.preventDefault();
     createWefoxData(addCity);
     setIsShowingModalAddCity(false);
-    setRefreshing(!refreshing);
+    setTimeout(() => {
+      setRefreshing(!refreshing);
+    }, 1000)
   };
 
   return (
