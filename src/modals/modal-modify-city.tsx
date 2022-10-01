@@ -50,7 +50,7 @@ const ModalModifyCity: FC<Props> = ({
     setIsShowingModalModifyCity(false);
     setTimeout(() => {
       setRefreshing(!refreshing);
-    }, 1000)
+    }, 500)
   };
 
   return (  

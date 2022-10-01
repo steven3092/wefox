@@ -62,7 +62,7 @@ const WefoxApp = () => {
     removeWefoxDataList(id);
     setTimeout(() => {
       setRefreshing(!refreshing);
-    }, 1000)
+    }, 500)
   };
   
   const handleClickModalModifyCity = (
