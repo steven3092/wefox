@@ -44,7 +44,7 @@ const ModalAddCity: FC<Props> = ({
     setIsShowingModalAddCity(false);
     setTimeout(() => {
       setRefreshing(!refreshing);
-    }, 500)
+    }, 100)
   };
 
   return (

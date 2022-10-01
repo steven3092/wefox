@@ -59,10 +59,10 @@ const WefoxApp = () => {
   }, [refreshing]);
 
   const handleClickDelete = (id: number) => {
-    removeWefoxDataList(id);
+    removeWefoxDataList(id);    
     setTimeout(() => {
       setRefreshing(!refreshing);
-    }, 500)
+    }, 100)
   };
   
   const handleClickModalModifyCity = (
@@ -99,10 +99,10 @@ const WefoxApp = () => {
           <thead>
             <tr>
               <TableTh>Id</TableTh>
+              <TableTh>Title</TableTh>
               <TableTh>Content</TableTh>
               <TableTh>Lat</TableTh>
               <TableTh>Long</TableTh>
-              <TableTh>Title</TableTh>
               <TableTh>Created At</TableTh>
               <TableTh>Updated At</TableTh>
               <TableTh>Actions</TableTh>
@@ -112,10 +112,10 @@ const WefoxApp = () => {
           {listOfCities.map((el) =>
               <TableTr key={el.title}>
                 <TableTd>{el.id}</TableTd>
+                <TableTd>{el.title}</TableTd>
                 <TableTd>{el.content}</TableTd>
                 <TableTd>{el.lat}</TableTd>
                 <TableTd>{el.long}</TableTd>
-                <TableTd>{el.title}</TableTd>
                 <TableTd>{el.created_at}</TableTd>
                 <TableTd>{el.updated_at}</TableTd>
                 <TableTd>
